@@ -9,7 +9,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn @click="compartilhar()" text>
+      <v-btn v-if="exibirCopiar()" @click="compartilhar()" text>
         <span v-if="!exibirCopiado">
           <span class="mr-2">Compartilhar</span>
           <v-icon>mdi-share-variant</v-icon>
@@ -48,20 +48,20 @@ export default {
           title: document.title,
           text: 'Veja qual foto a NASA tirou no dia do seu nascimento!',
           url: window.location.href
-        }).then(() => console.log('Successful share! 🎉')).catch(err => console.error(err));
+        }).then(() => console.log('Compartilhado! 🎉')).catch(err => console.error(err));
       }else {
         const setExibir = (valor) => {
           this.exibirCopiado = valor
         }
-        navigator.clipboard.writeText(this.getURL());
+        await navigator.clipboard.writeText(window.location.href);
         setExibir(true)
         setTimeout(function () {
           setExibir(false)
         }, 2500);
       }
     },
-    getURL() {
-      return window.location.href
+    exibirCopiar(){
+      return false //TODO o botao nao funciona no in-app browser do instagram :(
     }
   }
 };

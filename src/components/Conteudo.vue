@@ -34,6 +34,7 @@
                   v-model="date"
                   scrollable
                   locale="pt-br"
+                  :min="new Date('1995', '05', '16').toISOString().slice(0,10)"
                   :max="new Date().toISOString().slice(0,10)"
           >
             <v-spacer></v-spacer>
@@ -42,7 +43,7 @@
                     color="primary"
                     @click="modal = false"
             >
-              Cancel
+              Cancelar
             </v-btn>
             <v-btn
                     text
